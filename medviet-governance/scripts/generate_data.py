@@ -1,7 +1,7 @@
-# scripts/generate_data.py
 import pandas as pd
 from faker import Faker
 import random
+import os
 
 fake = Faker("vi_VN")
 Faker.seed(42)
@@ -29,6 +29,7 @@ def generate_patients(n=200):
     return pd.DataFrame(records)
 
 df = generate_patients()
+os.makedirs("data/raw", exist_ok=True)
 df.to_csv("data/raw/patients_raw.csv", index=False)
 print(f"Generated {len(df)} patient records")
 print(df.head(3))
